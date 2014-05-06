@@ -20,18 +20,26 @@ plot2 <- function (data_loc = power_consumption) {
     # only plot date range we care about
     filtered <- subset(data, Date == '1/2/2007' | Date == '2/2/2007')
     
-    # add column of Date datatype which contains both
-    # the correct date and time of each datapoint
-    filtered$datetime <- apply(filtered, 1, function(row)
-        strptime(paste(row[1], row[2]), format='%d/%m/%Y %H:%M:%S'))
+    # add column of type POSIXct which contains both date and time
+    filtered$datetime <- apply(
+        filtered, 1,        # for each row of the dataset
+        function(row)           # use that row
+            as.POSIXct(             # to get the number of seconds since UNIX
+                strptime(               # from the given date and time fields
+                    paste(row[1], row[2]),  # which are located in columns 1 & 2
+                    format='%d/%m/%Y %H:%M:%S'))) # and are formatted like so
     
 
     
-    # construct histogram
-    plot <- plot(filtered$datetime, filtered$Global_active_power,
-                 col  = 'red',
-                 main = 'Global Active Power',
-                 xlab = 'Global Active Power (kilowatts)')
+    # construct line graph
+    plot(filtered$datetime,
+         filtered$Global_active_power,
+         type = 'l',
+         main = 'Global Active Power',
+         ylab = 'Global Active Power (kilowatts)')
+    #lines(filtered$datetime,
+     #     filtered$Global_active_power, type = 'l')
+    
     
     # TODO code that creates the PNG file, otw it looks done
 }

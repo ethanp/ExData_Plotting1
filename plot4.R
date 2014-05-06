@@ -11,5 +11,15 @@ power_consumption <- '/Users/ethan/code/non_apple/data/household_power_consumpti
 # initial rough estimate
 plot4 <- function (data_loc = power_consumption) {
     data <- read.csv(data_loc)
-    line(time, gap, data = data)
+    
+    # allocate a 2x2 grid of plots
+    par(mfrow = c(2,2))
+    
+    # put the plots on the grid
+    with(data, {
+        plot(FirstCol)
+        plot(ScndCol)
+        plot(ThrdCol)
+        plot(FourthCol)
+    })
 }

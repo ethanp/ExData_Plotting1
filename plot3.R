@@ -10,5 +10,9 @@ power_consumption <- '/Users/ethan/code/non_apple/data/household_power_consumpti
 # initial rough estimate
 plot3 <- function (data_loc = power_consumption) {
     data <- read.csv(data_loc)
-    line(time, gap, data = data)
+    
+    # example of overlaid scatterplots from lecture
+    plot(x, y, type = 'n')
+    lines(x[g == 'male'], y[g == 'male'], col = 'green')
+    lines(x[g == 'female'], y[g == 'female'], col = 'blue')
 }

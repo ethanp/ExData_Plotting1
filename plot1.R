@@ -24,12 +24,13 @@ plot1 <- function (data_loc = power_consumption) {
 
     
     # construct and save histogram
-    png('plot1.png')
+    
+    png('plot1.png') # open PNG device
     
     hist(filtered$Global_active_power,
          col  = 'red',
          main = 'Global Active Power',
          xlab = 'Global Active Power (kilowatts)')
     
-    dev.off()
+    dev.off() # save PNG to filesystem
 }
